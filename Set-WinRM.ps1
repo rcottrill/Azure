@@ -4,9 +4,8 @@
     [string] $HostName
 )
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/ConfigureWinRM.ps1" -OutFile "$env:temp\ConfigureWinRM.ps1"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/winrmconf.cmd" -OutFile "$env:temp\winrmconf.cmd"
-New-Item c:\WinRM.txt -type file -Force
+Invoke-WebRequest -Uri "https://github.com/rcottrill/Azure/blob/master/Set-WinRM.ps1" -OutFile "$env:temp\ConfigureWinRM.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/rcottrill/Azure/master/winrmconf.cmd" -OutFile "$env:temp\winrmconf.cmd"
 
 
 function Delete-WinRMListener
