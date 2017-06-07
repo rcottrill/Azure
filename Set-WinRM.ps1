@@ -4,7 +4,7 @@
     [string] $HostName
 )
 
-Invoke-WebRequest -Uri "https://github.com/rcottrill/Azure/blob/master/Set-WinRM.ps1" -OutFile "$env:temp\ConfigureWinRM.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/rcottrill/Azure/master/Set-WinRM.ps1" -OutFile "$env:temp\ConfigureWinRM.ps1"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/rcottrill/Azure/master/winrmconf.cmd" -OutFile "$env:temp\winrmconf.cmd"
 
 
