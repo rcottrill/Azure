@@ -1,4 +1,4 @@
-﻿
+
 workflow Stop-ALLVMs 
 { 
      
@@ -15,16 +15,23 @@ $ServicePassword = convertto-securestring $SPpass -asplaintext -force # The pass
 $creds = new-object -typename System.Management.Automation.PSCredential -argumentlist $SPuser, $ServicePassword
 Login-AzureRmAccount -Credential $creds -ServicePrincipal -TenantId $TenantID
 
+$RGSplit = $ResourceGroupNam.Split(",") 
 
-$GetVMs = get-AzureRmVM -ResourceGroupName "$ResourceGroupName"
+foreach ($RG in $RGSplit) {
+
+$GetVMs = get-AzureRmVM -ResourceGroupName "$RG"
 
      if(!$GetVMs) { 
-        Write-Output "No VMs were found in your subscription." 
+        Write-Output "No VMs were found in your RG." 
      } else { 
         Foreach ($VM in $GetVMs) 
         { 
-            Write-Output "Stopping $($VM.Name)"
-        Stop-AzureRmVM -ResourceGroupName "$ResourceGroupName" -Name $VM.Name -Force -ErrorAction SilentlyContinue 
+        Write-Output "Stopping $($VM.Name)"
+        Stop-AzureRmVM -ResourceGroupName "$RG" -Name $VM.Name -Force -ErrorAction SilentlyContinue 
         } 
 }
+
+}
+
+
 }
